@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:49:34 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/08 11:35:17 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:16:32 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# define	TILE_SIZE 64
+# define	T_S 64 // TILE_SIZE
 # define	WND_NAME "so_long"
 
 # define	UP 119 // W
@@ -27,14 +27,21 @@
 # define	DOWN 115 // S
 # define	RIGHT 100 // D
 # define	ESC	65307 // Exit the game
+# define	X_CLOSE 17 // x out the window
 
-# define	LOAD_ERROR "ERROR!!! Use correct input like this:"
+# define	LOAD_ER "ERROR!!! Use correct input like this:"
+
+typedef struct s_pos
+{
+	int	x;
+	int	y;
+}	t_pos;
 
 typedef struct s_map
 {
 	char	**grid;
-	int		length;
-	int		width;
+	int		y;
+	int		x;
 	int		collect_count;
 	int		player_x;
 	int		player_y;
