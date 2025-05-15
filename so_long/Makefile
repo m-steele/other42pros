@@ -6,54 +6,21 @@
 #    By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 11:38:23 by ekosnick          #+#    #+#              #
-#    Updated: 2025/05/14 14:37:01 by ekosnick         ###   ########.fr        #
+#    Updated: 2025/05/15 11:25:32 by ekosnick         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
-# NAME = so_long
-
-# CC = gcc
-
-# SRC= mlx_shaders.c mlx_new_window.m mlx_init_loop.m mlx_new_image.m mlx_xpm.c mlx_int_str_to_wordtab.c
-
-# CFLAGS = -Wall -Wextra -Werror
-
-# SRC+= mlx_png.c mlx_mouse.m
-# OBJ1=$(SRC:.c=.o)
-# OBJ=$(OBJ1:.m=.o)
-# CFLAGS+=-O2
-
-# # Contains the X11 and MLX header files
-# INCLUDES = -I/usr/include -Imlxx
-
-# .c.o:
-# 	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
-
-# # Link X11 and MLX
-# MLX_FLAGS = -Lmlxx -lmlxx -L/usr/lib/X11 -lXext -lX11
-
-# $(NAME): $(OBJS)
-# 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_FLAGS)
-
-
-# Target executable name
 NAME = so_long
 
-# Compiler and compilation flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g # Added -g for debugging symbols
-# Assuming mlx files are in 'mlx' directory and libft headers in 'libft'
+CFLAGS = -Wall -Wextra -Werror -g
 INCLUDES = -Ilibft -Imlx
 
-# MLX library flags (adjust paths and library names if necessary)
-# -Lmlx tells the linker to look in the 'mlx' directory for libraries
-# -lmlx might need to be more specific, e.g., -lmlx_Linux if you're using libmlx_Linux.a
-# Adding -lm for math functions and -lbsd if needed by mlx.
+# MLX library flags -lm for math functions and -lbsd
 MLX_FLAGS = -Lmlx -lmlx -lXext -lX11 -lm -lbsd
 
 # Source files for the main application
-SRCS_MAIN = so_long.c load_map.c get_map_utils.c
+SRCS_MAIN = so_long.c load_map.c get_map_utils.c map_valid.c
 
 # Object files for the main application
 OBJ_DIR_MAIN = obj

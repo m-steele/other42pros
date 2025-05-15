@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:40:54 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/14 11:55:54 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:31:50 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	key_press(int key, t_game *game)
 		i++;
 		ft_printf("\nnumber of moves: %i\n", i);
 	}
-	else if (key == ESC)	/*IS THIS ESC NECESSARY HERE????*/
+	else if (key == ESC)
 		close_g(key, game);
 	return (0);
 }
@@ -61,7 +61,7 @@ int	main(int ac,char **av)
 	if (!game.mlx)
 		return (ft_printf("Error init game\n"), 1);
 	if (!load_map(av[1], &game.map))
-		return (free(game.mlx), ft_printf("ERROR Loading map\n"), 1);
+		return (free(game.mlx), ft_printf("Error Loading map\n"), 1);
 	game.win = mlx_new_window(game.mlx, game.map.x * T_S,
 		game.map.y * T_S, "so_long");
 	if (!game.win)

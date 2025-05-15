@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:49:34 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/14 14:34:53 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:29:55 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_pos
 typedef struct s_map
 {
 	char	**grid;
+	// char	*line; /**/
 	int		y;
 	int		x;
 	int		collect_count;
@@ -75,8 +76,9 @@ int	load_map(const char *filename, t_map *map);
 void	render_map(t_game *game);
 int		load_images(t_game *game);
 
-int	close_g(int key, t_game *game);
-int	key_press(int key, t_game *game);
+int		close_g(int key, t_game *game);
+int		key_press(int key, t_game *game);
 
+int		map_valid(t_map *map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 09:14:48 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/14 11:16:27 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/15 11:50:24 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,13 @@ int	load_images(t_game *game)
 }
 
 // use mlx_put_image_to_window() to put the images on the map
-static void	put_to_win(t_game *game, char tile, int x, int y) /*here map could just be a char?*/
+static void	put_to_win(t_game *game, char tile, int x, int y)
 {
+	mlx_put_image_to_window(game->mlx, game->win,
+			game->image.space, x, y);
 	if (tile == '1')
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->image.wall, x, y);
-	else if (tile == '0' || tile == 'C' || tile == 'E' || tile == 'P')
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->image.space, x, y);
 	else if (tile == 'C')
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->image.collectable, x, y);
