@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:40:54 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/12 12:17:00 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/14 11:55:54 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,18 @@ int	key_press(int key, t_game *game)
 {
 	static int	i;
 	
-	i = 0;
+	// i = 0;
 	if (key == UP || key == DOWN || key == LEFT || key == RIGHT)
 	{
 		i++;
 		ft_printf("\nnumber of moves: %i\n", i);
 	}
 	else if (key == ESC)	/*IS THIS ESC NECESSARY HERE????*/
-		close(key, game);
+		close_g(key, game);
 	return (0);
 }
 
-
-int	close(int key, t_game *game)
+int	close_g(int key, t_game *game)
 {
 	if (key == ESC || key == X_CLOSE)
 	{
@@ -60,18 +59,18 @@ int	main(int ac,char **av)
 		return (ft_printf("%s\n%s maps/map.ber\n", LOAD_ER, av[0]));
 	game.mlx = mlx_init();
 	if (!game.mlx)
-		return (ft_printf("Error init game"), 1);
+		return (ft_printf("Error init game\n"), 1);
 	if (!load_map(av[1], &game.map))
-		return (free(game.mlx), ft_printf("ERROR Loading map"), 1);
+		return (free(game.mlx), ft_printf("ERROR Loading map\n"), 1);
 	game.win = mlx_new_window(game.mlx, game.map.x * T_S,
 		game.map.y * T_S, "so_long");
 	if (!game.win)
-		return (ft_printf("Error generating window"), 1);
+		return (ft_printf("Error generating window\n"), 1);
 	if (!load_images(&game))
-		return (ft_printf("Error loading images"), 1);
+		return (ft_printf("Error loading images\n"), 1);
 	render_map(&game);
 	mlx_key_hook(game.win, key_press, &game);
-	mlx_hook(game.win, 17, 0, close, &game);
+	mlx_hook(game.win, 17, 0, close_g, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

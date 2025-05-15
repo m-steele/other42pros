@@ -6,74 +6,81 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:02:27 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/12 13:00:21 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/15 10:36:48 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "so_long.h"
 
-int	load_images(t_game *game)
+int	n_line(int fd)
 {
-	int x;
-	int y;
+	int 	n;
+	char	*line;
 
-	game->image.space = mlx_xpm_file_to_image(game->mlx,
-		"texture/space.xpm", &x, &y);
-	game->image.space = mlx_xpm_file_to_image(game->mlx,
-		"texture/wall.xpm", &x, &y);
-	game->image.space = mlx_xpm_file_to_image(game->mlx,
-		"texture/collectable.xpm", &x, &y);
-	game->image.space = mlx_xpm_file_to_image(game->mlx,
-		"texture/exit.xpm", &x, &y);
-	game->image.space = mlx_xpm_file_to_image(game->mlx,
-		"texture/player.xpm", &x, &y);
-	if (!game->image.space || !game->image.wall || !game->image.collectable
-		|| !game->image.exit || !game->image.player)
-		return (0);
+	n = 0;
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		n++;
+		free(line);
+		// line = get_next_line(fd);
+	}
+	return (n);
+}
+
+static int	m_grid(t_map *map, const char *filename)
+{
+	int	fd;
+	int	i;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return(0);
+	map->grid = malloc(sizeof(char *) * (map->y + 1));
+	if (!map->grid)
+		return (close(fd), 0);
+	i = 0;
+	while (i < map->y)
+	{
+		map->grid[i] = get_next_line(fd);
+		if (!map->grid[i])
+		{
+			while (--i >= 0)
+				free(map->grid[i]);
+			free(map->grid);
+			close(fd);
+			return (0);
+		}
+		i++;		
+	}
+	map->grid[i] = NULL;
+	close(fd);
 	return (1);
 }
 
-// use mlx_put_image_to_window() to put the images on the map
-static void	put_to_win(t_game *game, char *tile, int x, int y) /*here map could just be a char?*/
+int	load_map(const char *filename, t_map *map)
 {
-	if (tile == '1')
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->image.wall, x, y);
-	else if (tile == '0' || tile == 'C' || tile == 'E' || tile == 'P')
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->image.space, x, y);
-	else if (tile == 'C')
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->image.collectable, x, y);
-	else if (tile == 'E')
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->image.exit, x, y);
-		else if (tile == 'P')
+	int fd;
+	char *line;
+
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	map->y = n_line(fd); /*allocate to struct*/
+	close (fd);
+	fd = open(filename, O_RDONLY); /*reopen to read*/
+	// if (map->y == 0)
+	// 	return (0);
+	line = get_next_line(fd);
+	if (!line)
 	{
-		game->map.player_x = x;
-		game->map.player_x = y;
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->image.player, x, y);
+		ft_printf("gnl() FIALED\n");
+		close (fd);
+		return (0);
 	}
-}
-
-
-void	render_map(t_game *game)
-{
-	int		x;
-	int		y;
-	char	tile;
-
-	y = 0;
-	while (y < game->map.y)
-	{
-		x = 0;
-		while (x < game->map.x)
-		{
-			tile = game->map.grid[y][x];
-			put_to_win(game, tile, x * T_S, y * T_S);
-			x++;
-		}
-		y++;
-	}
+	map->x = ft_strlen(line) - (line[ft_strlen(line) - 1] =='\n');
+	free(line);
+	close(fd);
+	if (!m_grid(map, filename))
+		return(0);
+	return(1);
 }

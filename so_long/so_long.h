@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:49:34 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/12 12:16:32 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/14 14:34:53 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 # include "libft/libft.h"
 # include "mlx/mlx.h"
+# include "mlx/mlx_int.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <fcntl.h>
 
 # define	T_S 64 // TILE_SIZE
 # define	WND_NAME "so_long"
@@ -47,23 +49,34 @@ typedef struct s_map
 	int		player_y;
 }	t_map;
 
-typedef	struct s_img
+typedef	struct s_image
 {
 	void	*space;
 	void	*wall;
 	void	*collectable;
 	void	*exit;
 	void	*player;
-}	t_img;
+}	t_image;
 
 typedef	struct s_game
 {
 	void	*mlx;
 	void	*win;
 	t_map	map;
-	t_img	image;
+	t_image	image;
 	int		moves;
 	int		collected;
 }	t_game;
+
+/*render_map*/
+
+int	load_map(const char *filename, t_map *map);
+
+void	render_map(t_game *game);
+int		load_images(t_game *game);
+
+int	close_g(int key, t_game *game);
+int	key_press(int key, t_game *game);
+
 
 #endif
