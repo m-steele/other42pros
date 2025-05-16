@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:02:27 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/16 11:16:48 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/16 11:41:47 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ int	load_map(const char *file, t_map *map)
 	while ((line = get_next_line(fd)))
 	{
 		int i = 0;
-		ft_printf("This is the line:%s\n", line);
-		map->y++;
-		while (line[i++])
+		// ft_printf("This is the line:%s\n", line);
+		map->y++; /*keep this*/
+		while (line[i++])	/*this nested while/if loop needs to be delt with some other way*/
 			if (line[i] == 'C')
 				map->collect_count++;
-		free(line);
+		free(line); /*keep this*/
 	}
 	map->y++;
 	close(fd);

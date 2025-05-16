@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:49:34 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/16 07:34:52 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/16 12:14:37 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	render_map(t_game *game);
 int		load_images(t_game *game);
 
 int		close_g(int key, t_game *game);
+// int		close_g(void *param);
 int		key_press(int key, t_game *game);
 
 int		map_valid(t_map *map);
