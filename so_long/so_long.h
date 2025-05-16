@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:49:34 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/15 14:29:55 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/16 07:34:52 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define	WND_NAME "so_long"
 
 # define	UP 119 // W
-# define	LEFT 97  // A
+# define	LEFT 97 // A
 # define	DOWN 115 // S
 # define	RIGHT 100 // D
 # define	ESC	65307 // Exit the game

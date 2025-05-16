@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 09:14:48 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/15 11:50:24 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/16 09:14:43 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static void	put_to_win(t_game *game, char tile, int x, int y)
 	if (tile == '1')
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->image.wall, x, y);
-	else if (tile == 'C')
-		mlx_put_image_to_window(game->mlx, game->win,
-			game->image.collectable, x, y);
 	else if (tile == 'E')
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->image.exit, x, y);
-		else if (tile == 'P')
+	else if (tile == 'C')
+		mlx_put_image_to_window(game->mlx, game->win,
+			game->image.collectable, x, y);
+	else if (tile == 'P')
 	{
 		game->map.player_x = x;
 		game->map.player_y = y;
@@ -70,8 +70,34 @@ void	render_map(t_game *game)
 		{
 			tile = game->map.grid[y][x];
 			put_to_win(game, tile, x * T_S, y * T_S);
+			if (game->map.grid[y][x] == 'P')
+			{
+				game->map.player_x = x * T_S;
+				game->map.player_y = y * T_S;
+				game->map.grid[y][x] = '0';
+			}
 			x++;
 		}
 		y++;
 	}
 }
+
+// void	render_map(t_game *game)
+// {
+// 	int		x;
+// 	int		y;
+// 	char	tile;
+
+// 	y = 0;
+// 	while (y < game->map.y)
+// 	{
+// 		x = 0;
+// 		while (x < game->map.x)
+// 		{
+// 			tile = game->map.grid[y][x];
+// 			put_to_win(game, tile, x * T_S, y * T_S);
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// }
