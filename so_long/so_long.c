@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:40:54 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/16 10:33:03 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/16 10:56:18 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@ int	key_count(int key, t_game **game)
 		close_g(key, *game);
 	return (i);
 }
-
-
-
-
 
 /*Something is very wrong with the mechanics of movement*/
 /*Can almost get it to work, but why it walks into walls and resets 
@@ -126,11 +122,6 @@ int	main(int ac,char **av)
 		return (ft_printf("Error init game\n"), 1);
 	if (!load_map(av[1], &game.map))
 		return (free(game.mlx), ft_printf("Error Loading map\n"), 1);
-
-	// 	countif game->map.image.collectable!!!!!!!!!!
-	// game->map.collect_count++;
-
-	
 	game.win = mlx_new_window(game.mlx, game.map.x * T_S,
 		game.map.y * T_S, "so_long");
 	if (!game.win)

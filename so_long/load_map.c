@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:02:27 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/16 09:15:43 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/16 11:16:48 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	load_map(const char *file, t_map *map)
 
 	map->y = 0;
 	map->x = 0;
+	map->collect_count = 0;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (0);
@@ -65,7 +66,12 @@ int	load_map(const char *file, t_map *map)
 	free(line);
 	while ((line = get_next_line(fd)))
 	{
+		int i = 0;
+		ft_printf("This is the line:%s\n", line);
 		map->y++;
+		while (line[i++])
+			if (line[i] == 'C')
+				map->collect_count++;
 		free(line);
 	}
 	map->y++;
