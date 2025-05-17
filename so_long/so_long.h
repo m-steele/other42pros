@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:49:34 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/16 12:14:37 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/17 10:55:55 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,15 @@
 # define	ESC	65307 // Exit the game
 # define	X_CLOSE 17 // x out the window
 
-# define	LOAD_ER "ERROR!!! Use correct input like this:"
-
-typedef struct s_pos
-{
-	int	x;
-	int	y;
-}	t_pos;
+# define	INPT_ER "Error\nUse correct input like this:"
+# define	INIT_ER "Error\ninit game\n"
+# define	LOAD_ER "Error\nLoading map\n"
+# define	GENW_ER "Error\ngenerating window\n"
+# define	IMAG_ER "Error\nloading images\n"
 
 typedef struct s_map
 {
 	char	**grid;
-	// char	*line; /**/
 	int		y;
 	int		x;
 	int		collect_count;

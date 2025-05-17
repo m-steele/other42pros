@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:02:27 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/16 11:41:47 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/17 11:09:16 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	load_map(const char *file, t_map *map)
 	while ((line = get_next_line(fd)))
 	{
 		int i = 0;
-		// ft_printf("This is the line:%s\n", line);
 		map->y++; /*keep this*/
 		while (line[i++])	/*this nested while/if loop needs to be delt with some other way*/
 			if (line[i] == 'C')
@@ -78,7 +77,7 @@ int	load_map(const char *file, t_map *map)
 	close(fd);
 	if (!m_grid(map, file))
 		return (0);
-	if (!map_valid(map))/*kill*/
-		return (ft_printf("MAP NOT VALID\n"), 0);
+	if (!map_valid(map))
+		return (ft_printf("Error\nMap Not Valid\n"), 0);
 	return (1);
 }
