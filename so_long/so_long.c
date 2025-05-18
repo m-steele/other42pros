@@ -6,89 +6,32 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:40:54 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/17 11:08:56 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/18 12:32:28 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "so_long.h"
 
-int	key_count(int key, t_game **game)
+void	destroy_images(t_game *game)
 {
-	static int	i;
-	
-	if (key == UP || key == DOWN || key == LEFT || key == RIGHT)
+	if (game->mlx)
 	{
-		i++;
-		ft_printf("number of moves: %i\n", i);
+		if (game->image.space)
+			mlx_destroy_image(game->mlx, game->image.space);
+		if (game->image.wall)
+			mlx_destroy_image(game->mlx, game->image.wall);
+		if (game->image.player)
+			mlx_destroy_image(game->mlx, game->image.player);
+		if (game->image.exit)
+			mlx_destroy_image(game->mlx, game->image.exit);
+		if (game->image.collectable)
+			mlx_destroy_image(game->mlx, game->image.collectable);
 	}
-	else if (key == ESC)
-		close_g(key, *game);
-	return (i);
-}
-
-void move_player(int new_x, int new_y, t_game *game)
-{
-	if (game->map.grid[new_y][new_x] == 'C')
-	{
-		game->collected++;
-		game->map.grid[new_y][new_x] = '0';
-		ft_printf(" - Horror Idels: %i, Idles Collected: %i\n", 
-			game->map.collect_count, game->collected);
-	}
-	game->map.player_x = new_x * T_S;
-	game->map.player_y = new_y * T_S;
-}
-
-void	complete_level(int new_x, int new_y, t_game *game)
-{
-	if (game->map.grid[new_y][new_x] == 'E')
-	{
-		if (game->collected == game->map.collect_count)
-		{
-			ft_printf("You collected all Horror Idles and escaped Hell!\n");
-			close_g(ESC, game);
-			}
-		else
-			ft_printf("You cannot leave without all Horror Idles ]:{=\n");
-	}
-}
-
-void track_change(int key, int x, int y, t_game *game)
-{
-	if (game->map.grid[y][x] == 'E')
-		complete_level(x, y, game);
-	if (game->map.grid[y][x] != '1' && game->map.grid[y][x] != 'E')
-	{
-		key_count(key, &game);
-		move_player(x, y, game);
-	}
-}
-
-int	key_press(int key, t_game *game)
-{
-	int	new_x;
-	int	new_y;
-	
-	new_x = game->map.player_x / T_S;
-	new_y = game->map.player_y / T_S;
-	if (key == UP)
-		new_y--;
-	else if (key == DOWN)
-		new_y++;
-	else if (key == LEFT)
-		new_x--;
-	else if (key == RIGHT)
-		new_x++;
-	if (key == UP || key == DOWN || key == LEFT || key == RIGHT)
-		track_change(key, new_x, new_y, game);
-	if (key == ESC)
-		close_g(key, game);
-	render_map(game);
-	return (0);
 }
 
 void	norm_sux(t_game *game)
 {
+	destroy_images(game);
 	if (game->win && game->mlx)
 	{
 		mlx_destroy_window(game->mlx, game->win);
@@ -102,7 +45,7 @@ void	norm_sux(t_game *game)
 	}
 }
 
-static void	clean_and_exit(t_game *game, const char *error)
+void	clean_and_exit(t_game *game, const char *error)
 {
 	int	i;
 
@@ -135,13 +78,6 @@ static int	destroyer(void *param)
 	
 	game = (t_game *)param;
 	clean_and_exit(game, "");
-	return (0);
-}
-
-int	close_g(int key, t_game *game)
-{
-	if (key == ESC)
-		clean_and_exit(game, "");
 	return (0);
 }
 
