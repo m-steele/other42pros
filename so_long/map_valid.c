@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   map_valid.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
+/*   By: ekosnick <ekosnick@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 10:43:39 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/19 09:24:48 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/19 13:58:57 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	flood_fill(t_map map, int x, int y, int *flood_coin)
+{
+	if (x < 0 || y < 0 || x >= map.x || y >= map.y)
+		return ;
+	if (map.grid[y][x] == 'F' || map.grid[y][x] == '1')
+		return ;
+	if (map.grid[y][x] == 'C')
+		(*flood_coin)++;
+	if (map.grid[y][x] != 'E')
+		map.grid[y][x] = 'F';
+	flood_fill(map, x + 1, y, flood_coin);
+	flood_fill(map, x - 1, y, flood_coin);
+	flood_fill(map, x, y + 1, flood_coin);
+	flood_fill(map, x, y - 1, flood_coin);
+}
 
 static int	tile_valid(char c, int *player, int *exit, int *collect)
 {
@@ -45,20 +61,38 @@ static int	line_valid(t_map *map, int y, int *player, int *exit, int *collect)
 	return (1);
 }
 
+void	print_map(t_map *map)
+{
+	int	y = 0;
+	while (y < map->y)
+	{
+		ft_printf("s%\n", map->grid[y]);
+		y++;
+	}	
+}
+
 int	map_valid(t_map *map)
 {
 	int		y;
 	int		player;
 	int		exit;
 	int		collect;
+	int		flood_coin;
 
 	y = -1;
 	player = 0;
 	exit = 0;
 	collect = 0;
+	flood_coin = 0;
 	while (++y < map->y)
 		if (!line_valid(map, y, &player, &exit, &collect))
 			return (0);
+	print_map(map);
+	flood_fill(*map, map->x, map->y, &flood_coin);
+	ft_printf("flood_coins = %i\ncollectables = %i\n", flood_coin, collect);
+	print_map(map);
+	if (flood_coin != collect)
+		return (0);
 	return (player == 1 && exit ==1 && collect >= 1);
 }
 

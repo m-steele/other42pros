@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
+/*   By: ekosnick <ekosnick@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:49:34 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/18 08:00:35 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/19 13:31:36 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_map
 	int		y;
 	int		x;
 	int		collect_count;
+	// int		floodfill_coins;
 	int		player_x;
 	int		player_y;
 }	t_map;

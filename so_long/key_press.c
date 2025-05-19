@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
+/*   By: ekosnick <ekosnick@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 07:25:10 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/18 12:33:11 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:56:02 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+#include "so_long.h"
 
 int	key_count(int key, t_game **game)
 {
 	static int	i;
-	
+
 	if (key == UP || key == DOWN || key == LEFT || key == RIGHT)
 	{
 		i++;
@@ -24,18 +24,18 @@ int	key_count(int key, t_game **game)
 	else if (key == ESC)
 	{
 		clean_and_exit(*game, "");
-			return (0);
+		return (0);
 	}
 	return (i);
 }
 
-void move_player(int new_x, int new_y, t_game *game)
+void	move_player(int new_x, int new_y, t_game *game)
 {
 	if (game->map.grid[new_y][new_x] == 'C')
 	{
 		game->collected++;
 		game->map.grid[new_y][new_x] = '0';
-		ft_printf(" - Horror Idels: %i, Idles Collected: %i\n", 
+		ft_printf(" - Horror Idels: %i, Idles Collected: %i\n",
 			game->map.collect_count, game->collected);
 	}
 	game->map.player_x = new_x * T_S;
@@ -50,17 +50,18 @@ void	complete_level(int new_x, int new_y, t_game *game)
 		{
 			ft_printf("You collected all Horror Idles and escaped Hell!\n");
 			clean_and_exit(game, "");
-			}
+		}
 		else
 			ft_printf("You cannot leave without all Horror Idles ]:{=\n");
 	}
 }
 
-void track_change(int key, int x, int y, t_game *game)
+/*	if (game->map.grid[y][x] != '1' && game->map.grid[y][x] !='E')*/
+void	track_change(int key, int x, int y, t_game *game)
 {
 	if (game->map.grid[y][x] == 'E')
 		complete_level(x, y, game);
-	if (game->map.grid[y][x] != '1' && game->map.grid[y][x] != 'E')
+	if (game->map.grid[y][x] != '1')
 	{
 		key_count(key, &game);
 		move_player(x, y, game);
@@ -71,7 +72,7 @@ int	key_press(int key, t_game *game)
 {
 	int	new_x;
 	int	new_y;
-	
+
 	new_x = game->map.player_x / T_S;
 	new_y = game->map.player_y / T_S;
 	if (key == UP)
@@ -87,7 +88,7 @@ int	key_press(int key, t_game *game)
 	if (key == ESC)
 	{
 		clean_and_exit(game, "");
-			return (0);
+		return (0);
 	}
 	render_map(game);
 	return (0);

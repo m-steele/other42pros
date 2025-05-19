@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
+/*   By: ekosnick <ekosnick@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 09:14:48 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/17 11:03:45 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/19 10:58:13 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int	load_images(t_game *game)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	game->image.space = mlx_xpm_file_to_image(game->mlx,
-		"texture/space.xpm", &x, &y);
+			"texture/space.xpm", &x, &y);
 	game->image.wall = mlx_xpm_file_to_image(game->mlx,
-		"texture/wall.xpm", &x, &y);
+			"texture/wall.xpm", &x, &y);
 	game->image.collectable = mlx_xpm_file_to_image(game->mlx,
-		"texture/collectable.xpm", &x, &y);
+			"texture/collectable.xpm", &x, &y);
 	game->image.exit = mlx_xpm_file_to_image(game->mlx,
-		"texture/exit.xpm", &x, &y);
+			"texture/exit.xpm", &x, &y);
 	game->image.player = mlx_xpm_file_to_image(game->mlx,
-		"texture/player.xpm", &x, &y);
+			"texture/player.xpm", &x, &y);
 	if (!game->image.space || !game->image.wall || !game->image.collectable
 		|| !game->image.exit || !game->image.player)
 		return (0);
@@ -37,7 +37,7 @@ int	load_images(t_game *game)
 static void	put_to_win(t_game *game, char tile, int x, int y)
 {
 	mlx_put_image_to_window(game->mlx, game->win,
-			game->image.space, x, y);
+		game->image.space, x, y);
 	if (tile == '1')
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->image.wall, x, y);

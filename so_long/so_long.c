@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
+/*   By: ekosnick <ekosnick@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:40:54 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/19 09:27:34 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:38:45 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "so_long.h"
+#include "so_long.h"
 
-void	destroy_images(t_game *game)
+void destroy_images(t_game *game)
 {
 	if (game->mlx)
 	{
@@ -29,13 +29,13 @@ void	destroy_images(t_game *game)
 	}
 }
 
-void	norm_sux(t_game *game)
+void norm_sux(t_game *game)
 {
 	destroy_images(game);
 	if (game->win && game->mlx)
 	{
 		mlx_destroy_window(game->mlx, game->win);
-		game->win = NULL;	
+		game->win = NULL;
 	}
 	if (game->mlx)
 	{
@@ -45,9 +45,9 @@ void	norm_sux(t_game *game)
 	}
 }
 
-void	clean_and_exit(t_game *game, const char *error)
+void clean_and_exit(t_game *game, const char *error)
 {
-	int	i;
+	int i;
 
 	if (error && *error)
 		ft_printf("%s\n", error);
@@ -72,18 +72,18 @@ void	clean_and_exit(t_game *game, const char *error)
 	exit(0);
 }
 
-static int	destroyer(void *param)
+static int destroyer(void *param)
 {
-	t_game	*game;
-	
+	t_game *game;
+
 	game = (t_game *)param;
 	clean_and_exit(game, "");
 	return (0);
 }
 
-int	main(int ac,char **av)
+int main(int ac, char **av)
 {
-	t_game	game;
+	t_game game;
 
 	ft_memset(&game, 0, sizeof(game));
 	if (ac != 2)
@@ -94,12 +94,14 @@ int	main(int ac,char **av)
 	if (!load_map(av[1], &game.map))
 		return (free(game.mlx), ft_printf(LOAD_ER, 1));
 	game.win = mlx_new_window(game.mlx, game.map.x * T_S,
-		game.map.y * T_S, "so_long");
+							  game.map.y * T_S, "so_long");
 	if (!game.win)
 		clean_and_exit(&game, GENW_ER);
 	if (!load_images(&game))
 		clean_and_exit(&game, IMAG_ER);
 	render_map(&game);
+	char	**new = game.map.grid;/**/
+	ft_printf("map->grid: %s\n", &new);/**/
 	mlx_hook(game.win, 17, 0, destroyer, &game);
 	mlx_key_hook(game.win, key_press, &game);
 	mlx_loop(game.mlx);
