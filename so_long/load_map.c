@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 12:02:27 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/18 16:44:41 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/19 09:25:51 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	get_line_loop(t_map *map, int fd)
 		return ;
 	}
 }
+
 static int	m_grid(t_map *map, const char *file)
 {
 	int		fd;
@@ -64,18 +65,16 @@ void	num_collectable(t_map *map, char *line)
 	}
 }
 
-void	make_grid_and_valid(const char *file, t_map *map)
+int	make_grid_and_valid(const char *file, t_map *map)
 {
 	if (!m_grid(map, file))
-		return ;
+		return (0);
 	if (!map_valid(map))
 	{
 		ft_printf("Error\nMap Not Valid\n");
-		// clean_and_exit(game, "Map Not Valid") 
-		// return ; IF WE DO NOT HAVE A VALID MAP, WE SHOULD NOT
-		//  PROJECT IT AND WE CANNOT CELAN AND EXIT SO THERE HAS
-		//  TO BE A BETTER WAY AS WE CANNOT RETURN (0) WITH A VOID FUNCTION
+		return (0);
 	}
+	return (1);
 }
 
 int	load_map(const char *file, t_map *map)
@@ -102,23 +101,12 @@ int	load_map(const char *file, t_map *map)
 		free(line);
 	}
 	close(fd);
-	make_grid_and_valid(file, map); /*CAN YOU JUST DO: if (!make_grid_and_valid) return(0) ->NO and if you leave the map the core is dumped...*/
+	if (!make_grid_and_valid(file, map))
+		return (0);
 	return (1);
 }
 
-// void	num_collectable(t_map *map, char *line)
-// {
-// 	int	i;
-	
-// 	i = 0;
-// 	while (line[i])
-// 	{
-// 		if (line[i] == 'C')
-// 			map->collect_count++;
-// 		i++;
-// 	}
-// }
-
+/*THIS ALSO WORKS, BUT IS STILL TOO BIG*/
 // int	load_map(const char *file, t_map *map)
 // {
 // 	char	*line;
@@ -142,6 +130,49 @@ int	load_map(const char *file, t_map *map)
 // 		map->y++;
 // 		free(line);
 // 	}
+// 	close(fd);
+// 	if (!m_grid(map, file))
+// 		return (0);
+// 	if (!map_valid(map))
+// 		return (ft_printf("Error\nMap Not Valid\n"), 0);
+// 	return (1);
+// }
+
+/*THIS IS THE ORIGINAL THAT WORKS, THERE WILL BE 
+A MEM LEAK SHOWN IF THERE IS AN ERROR, BUT THE 
+MAP WILL NOT LOAD AND AN ERROR IS RETURNED SO 
+I THINK THIS SHOULD BE FINE, OTHERWISE YOU WILL
+HAVE TO BACK TRACK IN USE THE GAME STRUCT SO THAT
+YOU CAN USE CLEAN AND EXIT*/
+
+// int	load_map(const char *file, t_map *map)
+// {
+// 	int		fd;
+// 	char	*line;
+
+// 	map->y = 0;
+// 	map->x = 0;
+// 	map->collect_count = 0;
+// 	fd = open(file, O_RDONLY);
+// 	if (fd < 0)
+// 		return (0);
+// 	line = get_next_line(fd);
+// 	if (!line)
+// 		return (close(fd), 0);
+// 	if (line[ft_strlen(line) - 1] == '\n')
+// 		line[ft_strlen(line) - 1] = '\0';
+// 	map->x = ft_strlen(line);
+// 	free(line);
+// 	while ((line = get_next_line(fd)))
+// 	{
+// 		int i = 0;
+// 		map->y++; /*keep this*/
+// 		while (line[i++])	/*this nested while/if loop needs to be delt with some other way*/
+// 			if (line[i] == 'C')
+// 				map->collect_count++;
+// 		free(line); /*keep this*/
+// 	}
+// 	map->y++;
 // 	close(fd);
 // 	if (!m_grid(map, file))
 // 		return (0);

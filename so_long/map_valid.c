@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 10:43:39 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/18 16:18:56 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/19 09:24:48 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	map_valid(t_map *map)
 	return (player == 1 && exit ==1 && collect >= 1);
 }
 
+/*THIS IS THE ORIGINAL THAT IS TOO BIG
+THE ABOVE APPEARS TO BE FINE FOR NOW...*/
 // int	map_valid(t_map *map)
 // {
 // 	int		x;
