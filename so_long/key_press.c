@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekosnick <ekosnick@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 07:25:10 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/19 11:56:02 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/20 09:27:23 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ void	move_player(int new_x, int new_y, t_game *game)
 		ft_printf(" - Horror Idels: %i, Idles Collected: %i\n",
 			game->map.collect_count, game->collected);
 	}
-	game->map.player_x = new_x * T_S;
-	game->map.player_y = new_y * T_S;
+	// game->map.player_x = new_x * T_S;
+	// game->map.player_y = new_y * T_S;
+	game->map.player_x = new_x;
+	game->map.player_y = new_y;
 }
 
 void	complete_level(int new_x, int new_y, t_game *game)
@@ -73,8 +75,10 @@ int	key_press(int key, t_game *game)
 	int	new_x;
 	int	new_y;
 
-	new_x = game->map.player_x / T_S;
-	new_y = game->map.player_y / T_S;
+	new_x = game->map.player_x;
+	new_y = game->map.player_y;
+	// new_x = game->map.player_x / T_S;
+	// new_y = game->map.player_y / T_S;
 	if (key == UP)
 		new_y--;
 	else if (key == DOWN)

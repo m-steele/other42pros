@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekosnick <ekosnick@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:40:54 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/19 12:38:45 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/20 09:41:42 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ int main(int ac, char **av)
 	if (!load_images(&game))
 		clean_and_exit(&game, IMAG_ER);
 	render_map(&game);
-	char	**new = game.map.grid;/**/
-	ft_printf("map->grid: %s\n", &new);/**/
 	mlx_hook(game.win, 17, 0, destroyer, &game);
 	mlx_key_hook(game.win, key_press, &game);
 	mlx_loop(game.mlx);
