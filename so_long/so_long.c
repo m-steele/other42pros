@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:40:54 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/20 09:41:42 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:30:12 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void destroy_images(t_game *game)
 	}
 }
 
-void norm_sux(t_game *game)
+void destroy_norm_sux(t_game *game)
 {
 	destroy_images(game);
 	if (game->win && game->mlx)
@@ -68,7 +68,7 @@ void clean_and_exit(t_game *game, const char *error)
 		free(game->map.grid);
 		game->map.grid = NULL;
 	}
-	norm_sux(game);
+	destroy_norm_sux(game);
 	exit(0);
 }
 

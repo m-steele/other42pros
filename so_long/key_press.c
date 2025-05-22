@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 07:25:10 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/20 09:27:23 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:17:54 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	move_player(int new_x, int new_y, t_game *game)
 	{
 		game->collected++;
 		game->map.grid[new_y][new_x] = '0';
-		ft_printf(" - Horror Idels: %i, Idles Collected: %i\n",
-			game->map.collect_count, game->collected);
+		// ft_printf(" - Horror Idels: %i, Idles Collected: %i\n",
+		// 	game->map.collect_count, game->collected);
 	}
 	// game->map.player_x = new_x * T_S;
 	// game->map.player_y = new_y * T_S;
@@ -50,11 +50,15 @@ void	complete_level(int new_x, int new_y, t_game *game)
 	{
 		if (game->collected == game->map.collect_count)
 		{
-			ft_printf("You collected all Horror Idles and escaped Hell!\n");
+			ft_printf("You collected all Idles and escaped Hell!\n");
 			clean_and_exit(game, "");
 		}
 		else
-			ft_printf("You cannot leave without all Horror Idles ]:{=\n");
+		{
+			ft_printf("You cannot leave without all Idles\n");
+			ft_printf("Remaining Idles = %i\n",
+				game->map.collect_count - game->collected);
+		}
 	}
 }
 

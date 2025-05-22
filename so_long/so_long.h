@@ -6,7 +6,7 @@
 /*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 09:49:34 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/20 11:23:18 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/21 13:34:19 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ typedef struct s_map
 	char	**grid;
 	int		y;
 	int		x;
+	int		player_count;
+	int		exit_count;
 	int		collect_count;
-	// int		flood_coll;
+	int		flood_coll;
+	int		flood_exit;
 	int		player_x;
 	int		player_y;
 }	t_map;
