@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+         #
+#    By: ekosnick <ekosnick@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 11:38:23 by ekosnick          #+#    #+#              #
-#    Updated: 2025/05/18 07:42:00 by ekosnick         ###   ########.fr        #
+#    Updated: 2025/05/22 10:27:25 by ekosnick         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ MLX_FLAGS = -Lmlx -lmlx -lXext -lX11 -lm -lbsd
 
 # Source files for the main application
 SRCS_MAIN = so_long.c load_map.c get_map_utils.c map_valid.c \
-			key_press.c
+			key_press.c copy_grid.c
 
 # Object files for the main application
 OBJ_DIR_MAIN = obj

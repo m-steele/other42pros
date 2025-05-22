@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekosnick <ekosnick@student.42.f>           +#+  +:+       +#+        */
+/*   By: ekosnick <ekosnick@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 09:14:48 by ekosnick          #+#    #+#             */
-/*   Updated: 2025/05/20 09:25:36 by ekosnick         ###   ########.fr       */
+/*   Updated: 2025/05/22 10:22:12 by ekosnick         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void	render_map(t_game *game)
 			{
 				game->map.player_x = x;
 				game->map.player_y = y;
-				// game->map.player_x = x * T_S;
-				// game->map.player_y = y * T_S;
 				game->map.grid[y][x] = '0';
 			}
 			x++;
